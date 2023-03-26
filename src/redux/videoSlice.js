@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   error: false,
 };
+
 export const videoSlice = createSlice({
   name: 'video',
   initialState,

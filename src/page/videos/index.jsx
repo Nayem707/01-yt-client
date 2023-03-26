@@ -7,7 +7,7 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 //icon
-
+import Card from '../../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -24,6 +24,7 @@ import {
   Info,
   Buttons,
   Button,
+  Recommend,
   Hr,
   Channel,
   ChannelInfo,
@@ -141,7 +142,7 @@ const Video = () => {
         <Hr />
         <Comments />
       </Content>
-      {/* <Recommend>
+      <Recommend>
         <Card type='sm' />
         <Card type='sm' />
         <Card type='sm' />
@@ -155,7 +156,7 @@ const Video = () => {
         <Card type='sm' />
         <Card type='sm' />
         <Card type='sm' />
-      </Recommend> */}
+      </Recommend>
     </Container>
   );
 };
