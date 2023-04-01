@@ -8,7 +8,7 @@ const Home = ({ type }) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`/videos/random`);
+      const res = await axios.get(`/videos/${type}`);
       setVideos(res.data);
     };
     fetchVideos();

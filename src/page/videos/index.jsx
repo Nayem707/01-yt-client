@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 //icon
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
+// import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+// import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import ShareIcon from '@mui/icons-material/Share';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -11,7 +11,7 @@ import Card from '../../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { format } from 'timeago.js';
+// import { format } from 'timeago.js';
 import Comments from '../../components/Comments';
 import { dislike, fetchSuccsess, like } from '../../redux/videoSlice';
 
@@ -65,14 +65,14 @@ const Video = () => {
     fetchData();
   }, [path, dispatch]);
 
-  const handleLikes = async () => {
-    await axios.put(`/users/like/${currentVideo._id}`);
-    dispatch(like(currentUser._id));
-  };
-  const handleDisLikes = async () => {
-    await axios.put(`/users/dislike/${currentVideo._id}`);
-    dispatch(dislike(currentUser._id));
-  };
+  // const handleLikes = async () => {
+  //   await axios.put(`/users/like/${currentVideo._id}`);
+  //   dispatch(like(currentUser._id));
+  // };
+  // const handleDisLikes = async () => {
+  //   await axios.put(`/users/dislike/${currentVideo._id}`);
+  //   dispatch(dislike(currentUser._id));
+  // };
 
   return (
     <Container>
@@ -90,27 +90,16 @@ const Video = () => {
           />
         </VideoWrapper>
 
-        <Title>{currentVideo.title}</Title>
+        <Title>this title</Title>
         <Details>
-          <Info>
-            {currentVideo.views} views . {format(currentVideo.createdAt)}
-          </Info>
+          <Info>5000 views . 1 day ago</Info>
           <Buttons>
-            <Button onClick={handleLikes}>
-              {currentVideo.likes?.includes(currentUser._id) ? (
-                <ThumbUpIcon />
-              ) : (
-                <ThumbUpOffAltIcon />
-              )}
-              {currentVideo.likes?.length}
+            <Button>
+              Like <ThumbUpIcon />
             </Button>
-            <Button onClick={handleDisLikes}>
-              {currentVideo.dislikes?.includes(currentUser._id) ? (
-                <ThumbDownAltIcon />
-              ) : (
-                <ThumbDownOutlinedIcon />
-              )}
+            <Button>
               Dislike
+              <ThumbDownAltIcon />
             </Button>
             <Button>
               <ShareIcon />
@@ -133,7 +122,7 @@ const Video = () => {
 
               <ChannelCounter>{channel.subscribers}subscribers</ChannelCounter>
 
-              <ChannelDesc>{currentVideo.desc}</ChannelDesc>
+              <ChannelDesc>this is descroption</ChannelDesc>
             </ChannelDetail>
           </ChannelInfo>
 
