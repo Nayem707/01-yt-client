@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
+import VideoCallOutlinedIcon from '@mui/icons-material/VideoCallOutlined';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import VideoCallOutlinedIcon from '@mui/icons-material/VideoCallOutlined';
 
 const Container = styled.div`
   position: sticky;
@@ -54,7 +54,6 @@ const Button = styled.button`
   align-items: center;
   gap: 2px;
 `;
-
 const User = styled.div`
   display: flex;
   align-items: center;
@@ -62,7 +61,6 @@ const User = styled.div`
   font-weight: 500;
   color: ${({ theme }) => theme.icon};
 `;
-
 const Avatar = styled.img`
   width: 32px;
   height: 32px;

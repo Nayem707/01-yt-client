@@ -11,7 +11,6 @@ const Avatar = styled.img`
   height: 40px;
   border-radius: 50%;
 `;
-
 /* color: ${({ theme }) => theme.text}; */
 const Details = styled.div`
   display: flex;
@@ -22,14 +21,12 @@ const Name = styled.span`
   font-size: 15px;
   font-weight: 500;
 `;
-
 const Date = styled.span`
   font-size: 12px;
   font-weight: 400;
   color: ${({ theme }) => theme.text};
   margin-left: 5px;
 `;
-
 const Text = styled.span`
   font-size: 14px;
 `;

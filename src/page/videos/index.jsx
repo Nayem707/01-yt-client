@@ -37,42 +37,41 @@ import {
 } from './Style';
 
 const Video = () => {
-  const { currentUser } = useSelector((state) => state.user);
-  const { currentVideo } = useSelector((state) => state.video);
-
-  console.log(currentUser);
-  console.log(currentVideo);
+  const { currentUser } = useSelector((state) => ({
+    currentUser: state.user.currentUser,
+  }));
+  const { currentVideo } = useSelector((state) => ({
+    currentVideo: state.video.currentVideo,
+  }));
+  console.log(currentVideo, 'currentVideo');
 
   const dispatch = useDispatch();
 
   const path = useLocation().pathname.split('/')[2];
-
+  console.log(path);
   const [channel, setChannel] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const videoRes = await axios.get(`/videos/find/${path}`);
-
-        const channelRes = await axios.get(`/users/find/${videoRes.data}`);
+        const channelRes = await axios.get(`/users/find/${videoRes.data._id}`);
+        console.log(channelRes);
         setChannel(channelRes.data);
-
-        dispatch(fetchSuccsess());
-      } catch (error) {
-        console.log(error);
-      }
+        dispatch(fetchSuccsess(videoRes.userId));
+      } catch (error) {}
     };
     fetchData();
   }, [path, dispatch]);
 
-  // const handleLikes = async () => {
-  //   await axios.put(`/users/like/${currentVideo._id}`);
-  //   dispatch(like(currentUser._id));
-  // };
-  // const handleDisLikes = async () => {
-  //   await axios.put(`/users/dislike/${currentVideo._id}`);
-  //   dispatch(dislike(currentUser._id));
-  // };
+  const handleLikes = async () => {
+    await axios.put(`/users/like/${currentVideo._id}`);
+    dispatch(like(currentUser._id));
+  };
+  const handleDisLikes = async () => {
+    await axios.put(`/users/dislike/${currentVideo._id}`);
+    dispatch(dislike(currentUser._id));
+  };
 
   return (
     <Container>
@@ -90,7 +89,7 @@ const Video = () => {
           />
         </VideoWrapper>
 
-        <Title>this title</Title>
+        <Title>{currentVideo.title}</Title>
         <Details>
           <Info>5000 views . 1 day ago</Info>
           <Buttons>
@@ -131,7 +130,7 @@ const Video = () => {
         <Hr />
         <Comments />
       </Content>
-      <Recommend>
+      {/* <Recommend>
         <Card type='sm' />
         <Card type='sm' />
         <Card type='sm' />
@@ -145,7 +144,7 @@ const Video = () => {
         <Card type='sm' />
         <Card type='sm' />
         <Card type='sm' />
-      </Recommend>
+      </Recommend> */}
     </Container>
   );
 };

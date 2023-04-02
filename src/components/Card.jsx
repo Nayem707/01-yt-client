@@ -52,20 +52,26 @@ const Card = ({ type, video }) => {
 
   useEffect(() => {
     const fetchChannel = async () => {
-      const res = await axios.get(`/users/find/${video.userId}`);
-      setChannel(res.data);
+      try {
+        const res = await axios.get(`/users/find/${video.userId}`);
+        setChannel(res.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
+
     fetchChannel();
   }, [video.userId]);
 
   return (
-    <Link to={`/video/${type}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/video/${video.userId}`} style={{ textDecoration: 'none' }}>
       <Container type={type}>
         <Image type={type} src={video.imgUrl} />
         <Details type={type}>
           <ChannelImage src={channel.img} type={type} />
           <Text>
             <Title>{video.title}</Title>
+
             <ChannelName>{channel.name}</ChannelName>
             <Info>
               {video.views} Views * {format(video.createdAt)}
