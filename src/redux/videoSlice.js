@@ -9,6 +9,7 @@ export const videoSlice = createSlice({
   name: 'video',
   initialState,
   reducers: {
+    //FETCH DATA
     fetchStart: (state) => {
       state.loading = true;
     },
@@ -20,6 +21,8 @@ export const videoSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
+
+    //LIKE or DISLIKE
     like: (state, action) => {
       if (!state.currentVideo.likes.includes(action.payload)) {
         state.currentVideo.likes.push(action.payload);
@@ -44,6 +47,7 @@ export const videoSlice = createSlice({
     },
   },
 });
+
 export const { fetchStart, fetchSuccsess, fetchFailure, like, dislike } =
   videoSlice.actions;
 

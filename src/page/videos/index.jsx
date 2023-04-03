@@ -55,7 +55,10 @@ const Video = () => {
     const fetchData = async () => {
       try {
         const videoRes = await axios.get(`/videos/find/${path}`);
-        const channelRes = await axios.get(`/users/find/${videoRes.data._id}`);
+        console.log(videoRes);
+        const channelRes = await axios.get(
+          `/users/find/${videoRes.data.userId}`
+        );
         console.log(channelRes);
         setChannel(channelRes.data);
         dispatch(fetchSuccsess(videoRes.userId));
@@ -89,14 +92,14 @@ const Video = () => {
           />
         </VideoWrapper>
 
-        <Title>{currentVideo.title}</Title>
+        <Title>this is</Title>
         <Details>
           <Info>5000 views . 1 day ago</Info>
           <Buttons>
-            <Button>
+            <Button onClick={handleLikes}>
               Like <ThumbUpIcon />
             </Button>
-            <Button>
+            <Button onClick={handleDisLikes}>
               Dislike
               <ThumbDownAltIcon />
             </Button>
