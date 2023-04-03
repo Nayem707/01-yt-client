@@ -133,7 +133,7 @@ const Video = () => {
         <Hr />
         <Comments />
       </Content>
-      {/* <Recommend>
+      <Recommend>
         <Card type='sm' />
         <Card type='sm' />
         <Card type='sm' />
@@ -147,7 +147,7 @@ const Video = () => {
         <Card type='sm' />
         <Card type='sm' />
         <Card type='sm' />
-      </Recommend> */}
+      </Recommend>
     </Container>
   );
 };
