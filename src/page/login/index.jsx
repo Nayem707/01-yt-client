@@ -7,7 +7,7 @@ import { loginFailure, loginStart, loginSuccsess } from '../../redux/userSlice';
 import { auth, provider } from '../../firebase';
 
 import { signInWithPopup } from 'firebase/auth';
-import { async } from '@firebase/util';
+// import { async } from '@firebase/util';
 
 const Container = styled.div`
   display: flex;
@@ -72,7 +72,7 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post('/auth/signin', { name, password });
+      const res = await axios.post('/auth/signin', { name, password, email });
       dispatch(loginSuccsess(res.data));
     } catch (error) {
       dispatch(loginFailure());
