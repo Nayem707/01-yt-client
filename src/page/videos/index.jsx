@@ -13,7 +13,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 // import { format } from 'timeago.js';
 import Comments from '../../components/Comments';
-import { dislike, fetchSuccsess, like } from '../../redux/videoSlice';
+import { dislike, fetchSuccess, like } from '../../redux/videoSlice';
 
 import {
   Container,
@@ -61,7 +61,7 @@ const Video = () => {
         );
         console.log(channelRes);
         setChannel(channelRes.data);
-        dispatch(fetchSuccsess(videoRes.userId));
+        dispatch(fetchSuccess(videoRes.userId));
       } catch (error) {}
     };
     fetchData();

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { loginFailure, loginStart, loginSuccsess } from '../../redux/userSlice';
+import { loginFailure, loginStart, loginSuccess } from '../../redux/userSlice';
 
 import { auth, provider } from '../../firebase';
 
 import { signInWithPopup } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 // import { async } from '@firebase/util';
 
 const Container = styled.div`
@@ -67,19 +68,21 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post('/auth/signin', { name, password, email });
-      dispatch(loginSuccsess(res.data));
-    } catch (error) {
+      const res = await axios.post('/auth/signin', { name, password });
+      dispatch(loginSuccess(res.data));
+      navigate('/');
+    } catch (err) {
       dispatch(loginFailure());
     }
   };
 
-  const signinWithGoogle = async () => {
+  const signInWithGoogle = async () => {
     dispatch(loginStart());
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -90,14 +93,15 @@ const SignIn = () => {
             img: result.user.photoURL,
           })
           .then((res) => {
-            dispatch(loginSuccsess(res.data));
+            console.log(res);
+            dispatch(loginSuccess(res.data));
+            navigate('/');
           });
       })
       .catch((error) => {
         dispatch(loginFailure());
       });
   };
-
   return (
     <Container>
       <Wrapper>
@@ -115,7 +119,7 @@ const SignIn = () => {
         <Button onClick={handleLogin}>Sign in</Button>
         <Title>Or</Title>
         <Title>
-          <Button onClick={signinWithGoogle}>Sign in With Google</Button>
+          <Button onClick={signInWithGoogle}>Sign in With Google</Button>
         </Title>
 
         <Input
