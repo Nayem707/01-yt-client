@@ -116,7 +116,7 @@ const SignIn = () => {
           placeholder='user password'
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button onClick={handleLogin}>Sign in</Button>
+        <Button onClick={handleLogin}>Login</Button>
         <Title>Or</Title>
         <Title>
           <Button onClick={signInWithGoogle}>Sign in With Google</Button>
@@ -135,7 +135,7 @@ const SignIn = () => {
           placeholder='user password'
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button>Submit</Button>
+        <Button>Sign up</Button>
       </Wrapper>
       <More>
         English (USA)

@@ -38,7 +38,7 @@ const Hr = styled.hr`
   border: 0.5px solid ${({ theme }) => theme.soft};
   margin: 15px 0px;
 `;
-const Recommend = styled.div`
+const Recommendation = styled.div`
   flex: 2;
 `;
 const Channel = styled.div`
@@ -68,7 +68,7 @@ const ChannelCounter = styled.span`
   color: ${({ theme }) => theme.textSoft};
   font-size: 13px;
 `;
-const ChannelDesc = styled.p`
+const Description = styled.p`
   font-size: 14px;
 `;
 const Subscribe = styled.button`
@@ -98,14 +98,14 @@ export {
   Buttons,
   Button,
   Hr,
-  Recommend,
+  Recommendation,
   Channel,
   ChannelInfo,
   Image,
   ChannelDetail,
   ChannelName,
   ChannelCounter,
-  ChannelDesc,
+  Description,
   Subscribe,
   VideoFrame,
 };

@@ -31,7 +31,7 @@ const ChannelImage = styled.img`
   background-color: #999;
   display: ${(props) => props.type === 'sm' && 'none'};
 `;
-const Text = styled.div``;
+const Texts = styled.div``;
 const Title = styled.h2`
   font-size: 18px;
   font-weight: 500;
@@ -57,20 +57,20 @@ const Card = ({ type, video }) => {
     };
     fetchChannel();
   }, [video.userId]);
+
   return (
-    <Link to={`/video/${video.userId}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/video/${video._id}`} style={{ textDecoration: 'none' }}>
       <Container type={type}>
         <Image type={type} src={video.imgUrl} />
         <Details type={type}>
-          <ChannelImage src={channel.img} type={type} />
-          <Text>
+          <ChannelImage type={type} src={channel.img} />
+          <Texts>
             <Title>{video.title}</Title>
-
             <ChannelName>{channel.name}</ChannelName>
             <Info>
-              {video.views} Views * {format(video.createdAt)}
+              {video.views} views • {format(video.createdAt)}
             </Info>
-          </Text>
+          </Texts>
         </Details>
       </Container>
     </Link>
