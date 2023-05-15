@@ -7,13 +7,14 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 //icon
-import Card from '../../components/Card';
+// import Card from '../../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 // import { format } from 'timeago.js';
 import Comments from '../../components/Comments';
 import { dislike, fetchSuccess, like } from '../../redux/videoSlice';
+import { subscription } from '../../redux/userSlice';
 
 import {
   Container,
@@ -34,72 +35,64 @@ import {
   ChannelCounter,
   ChannelDesc,
   Subscribe,
+  VideoFrame,
 } from './Style';
 
 const Video = () => {
-  const { currentUser } = useSelector((state) => ({
-    currentUser: state.user.currentUser,
-  }));
-  const { currentVideo } = useSelector((state) => ({
-    currentVideo: state.video.currentVideo,
-  }));
-  console.log(currentVideo, 'currentVideo');
-
+  const { currentUser } = useSelector((state) => state.user);
+  const { currentVideo } = useSelector((state) => state.video);
   const dispatch = useDispatch();
 
   const path = useLocation().pathname.split('/')[2];
-  console.log(path);
-  const [channel, setChannel] = useState({});
 
+  const [channel, setChannel] = useState({});
+  //USE EFFECT
   useEffect(() => {
     const fetchData = async () => {
       try {
         const videoRes = await axios.get(`/videos/find/${path}`);
-        console.log(videoRes);
         const channelRes = await axios.get(
           `/users/find/${videoRes.data.userId}`
         );
-        console.log(channelRes);
         setChannel(channelRes.data);
-        dispatch(fetchSuccess(videoRes.userId));
-      } catch (error) {}
+        dispatch(fetchSuccess(videoRes.data));
+      } catch (err) {}
     };
     fetchData();
   }, [path, dispatch]);
-
-  const handleLikes = async () => {
+  //HANDLE LIKE
+  const handleLike = async () => {
     await axios.put(`/users/like/${currentVideo._id}`);
     dispatch(like(currentUser._id));
   };
-  const handleDisLikes = async () => {
+  //HANDLE DISLIKE
+  const handleDislike = async () => {
     await axios.put(`/users/dislike/${currentVideo._id}`);
     dispatch(dislike(currentUser._id));
+  };
+  //HANDLE SUBSCRIBE
+  const handleSub = async () => {
+    currentUser.subscribedUsers.includes(channel._id)
+      ? await axios.put(`/users/unsub/${channel._id}`)
+      : await axios.put(`/users/sub/${channel._id}`);
+    dispatch(subscription(channel._id));
   };
 
   return (
     <Container>
       <Content>
         <VideoWrapper>
-          <iframe
-            width='100%'
-            height='400'
-            src='https://www.youtube.com/embed/tgbNymZ7vqY?controls=0'
-            title='yt video player'
-            frameBorder='0'
-            allow='accelerometer; autoplay; clipboard-write; encrypt-media;gyroscope; picture-in-picture'
-            allowFullScreen
-            controls
-          />
+          <VideoFrame src={currentVideo.videoUrl} controls />
         </VideoWrapper>
 
         <Title>this is</Title>
         <Details>
           <Info>5000 views . 1 day ago</Info>
           <Buttons>
-            <Button onClick={handleLikes}>
+            <Button onClick={handleLike}>
               Like <ThumbUpIcon />
             </Button>
-            <Button onClick={handleDisLikes}>
+            <Button onClick={handleDislike}>
               Dislike
               <ThumbDownAltIcon />
             </Button>
@@ -128,26 +121,16 @@ const Video = () => {
             </ChannelDetail>
           </ChannelInfo>
 
-          <Subscribe>SUBSCRIBE</Subscribe>
+          <Subscribe onClick={handleSub}>
+            {currentUser.subscribedUsers?.includes(channel._id)
+              ? 'SUBSCRIBED'
+              : 'SUBSCRIBE'}
+          </Subscribe>
         </Channel>
         <Hr />
-        <Comments />
+        <Comments videoId={currentVideo._id} />
       </Content>
-      <Recommend>
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-        <Card type='sm' />
-      </Recommend>
+      <Recommend tags={currentVideo.tags} />
     </Container>
   );
 };

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 import Comment from './Comment';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const Container = styled.div``;
 const NewComment = styled.div`
@@ -24,23 +26,29 @@ const Input = styled.input`
   color: ${({ theme }) => theme.text};
 `;
 
-const Comments = () => {
+const Comments = ({ videoId }) => {
+  const { currentUser } = useSelector((state) => state.user);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const res = await axios.get(`/comments/${videoId}`);
+        setComments(res.data);
+      } catch (err) {}
+    };
+    fetchComments();
+  }, [videoId]);
+
   return (
     <Container>
       <NewComment>
-        <Avatar src='https://lh3.googleusercontent.com/a/AGNmyxYlPdTJDwcwmMv8DEYyaL17OIphuq_IwDtdn5Fwag=s288' />
-        <Input placeholder='add a comment' />
+        <Avatar src={currentUser.img} />
+        <Input placeholder='Add a comment...' />
       </NewComment>
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
+      {comments.map((comment) => (
+        <Comment key={comment._id} comment={comment} />
+      ))}
     </Container>
   );
 };

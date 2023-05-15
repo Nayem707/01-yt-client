@@ -81,6 +81,13 @@ const Subscribe = styled.button`
   padding: 8px 18px;
   cursor: pointer;
 `;
+
+const VideoFrame = styled.video`
+  max-height: 720px;
+  width: 100%;
+  object-fit: cover;
+`;
+
 export {
   Container,
   Content,
@@ -100,4 +107,5 @@ export {
   ChannelCounter,
   ChannelDesc,
   Subscribe,
+  VideoFrame,
 };
