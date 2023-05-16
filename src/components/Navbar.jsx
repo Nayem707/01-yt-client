@@ -61,19 +61,27 @@ const User = styled.div`
   gap: 10px;
   font-weight: 500;
   color: ${({ theme }) => theme.icon};
+  cursor: pointer;
 `;
 const Avatar = styled.img`
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background-color: #999;
 `;
+const IconVideoAdd = styled.span`
+  padding: 2px 6px;
+  border: 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+`;
 
 const Navbar = () => {
+  const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
-  const { currentUser } = useSelector((state) => state.user);
 
   return (
     <>
@@ -88,7 +96,9 @@ const Navbar = () => {
           </Search>
           {currentUser ? (
             <User>
-              <VideoCallOutlinedIcon onClick={() => setOpen(true)} />
+              <IconVideoAdd onClick={() => setOpen(true)}>
+                <VideoCallOutlinedIcon />
+              </IconVideoAdd>
               <Avatar src={currentUser.img} />
               {currentUser.name}
             </User>

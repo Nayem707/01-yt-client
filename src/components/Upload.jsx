@@ -23,8 +23,8 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 550px;
   background-color: ${({ theme }) => theme.bgLighter};
   color: ${({ theme }) => theme.text};
   padding: 20px;
@@ -32,6 +32,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 20px;
   position: relative;
+  position: fixed;
 `;
 const Close = styled.div`
   position: absolute;

@@ -5,10 +5,10 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 // import ShareIcon from '@mui/icons-material/Share';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+// import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 //icon
-import Card from '../../components/Card';
+import Recomondation from '../../components/Recomendation';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -25,7 +25,6 @@ import {
   Info,
   Buttons,
   Button,
-  Recommendation,
   Hr,
   Channel,
   ChannelInfo,
@@ -135,7 +134,7 @@ const Video = () => {
         <Hr />
         <Comments videoId={currentVideo._id} />
       </Content>
-      <Recommendation tags={currentVideo.tags} />
+      <Recomondation tags={currentVideo.tags} />
     </Container>
   );
 };

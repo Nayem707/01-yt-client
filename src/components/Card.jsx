@@ -6,21 +6,20 @@ import { format } from 'timeago.js';
 
 const Container = styled.div`
   width: ${(props) => props.type !== 'sm' && '360px'};
-  margin-bottom: ${(props) => (props.type === 'sm' ? '30px' : '25px')};
+  margin-bottom: ${(props) => (props.type === 'sm' ? '10px' : '45px')};
   cursor: pointer;
   display: ${(props) => props.type === 'sm' && 'flex'};
   gap: 10px;
 `;
 const Image = styled.img`
-  width: ${(props) => (props.type === 'sm' ? '50%' : '100%')};
-  height: ${(props) => (props.type === 'sm' ? '130px' : '202px')};
+  width: 100%;
+  height: ${(props) => (props.type === 'sm' ? '120px' : '202px')};
   background-color: #999;
   flex: 1;
-  border-radius: 4px;
 `;
 const Details = styled.div`
   display: flex;
-  margin-top: ${(props) => props.type !== 'sm' && '14px'};
+  margin-top: ${(props) => props.type !== 'sm' && '16px'};
   gap: 12px;
   flex: 1;
 `;
@@ -32,18 +31,18 @@ const ChannelImage = styled.img`
   display: ${(props) => props.type === 'sm' && 'none'};
 `;
 const Texts = styled.div``;
-const Title = styled.h2`
-  font-size: 18px;
+const Title = styled.h1`
+  font-size: 16px;
   font-weight: 500;
   color: ${({ theme }) => theme.text};
 `;
-const ChannelName = styled.h4`
-  font-style: 15px;
+const ChannelName = styled.h2`
+  font-size: 14px;
   color: ${({ theme }) => theme.textSoft};
   margin: 9px 0px;
 `;
 const Info = styled.div`
-  font-style: 14px;
+  font-size: 14px;
   color: ${({ theme }) => theme.textSoft};
 `;
 
