@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { format } from 'timeago.js';
 //icon
-// import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-// import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 // import ShareIcon from '@mui/icons-material/Share';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 //icon
-// import Card from '../../components/Card';
+import Card from '../../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-// import { format } from 'timeago.js';
 import Comments from '../../components/Comments';
 import { dislike, fetchSuccess, like } from '../../redux/videoSlice';
 import { subscription } from '../../redux/userSlice';
@@ -95,17 +94,17 @@ const Video = () => {
           <Buttons>
             <Button onClick={handleLike}>
               {currentVideo.likes?.includes(currentUser?._id) ? (
-                <ThumbUpIcon />
+                <ThumbUpOffAltIcon />
               ) : (
-                <ThumbDownAltIcon />
+                <ThumbDownOutlinedIcon />
               )}{' '}
               {currentVideo.likes?.length}
             </Button>
             <Button onClick={handleDislike}>
               {currentVideo.dislikes?.includes(currentUser?._id) ? (
-                <PlaylistAddIcon />
+                <ThumbDownAltIcon />
               ) : (
-                <PlaylistAddIcon />
+                <ThumbDownAltIcon />
               )}{' '}
               Dislike
             </Button>
